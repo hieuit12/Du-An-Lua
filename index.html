@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lúa - Sách Vải STEM Cho Bé</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#76b947',  /* Farm Green */
+                        secondary: '#a1c4fd', /* Sky Blue */
+                        accent: '#F48FB1',   /* Soft Pink */
+                        yellow: '#FFF59D',   /* Soft Yellow */
+                        earth: '#8D6E63',    /* Earthy Brown */
+                        cream: '#FDFBF7',    /* Warm Background */
+                    },
+                    fontFamily: {
+                        sans: ['Quicksand', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1);
+            will-change: opacity, transform;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #FDFBF7;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #76b947;
+            border-radius: 10px;
+        }
+
+        .blob-shape {
+            position: absolute;
+            z-index: -1;
+            filter: blur(60px);
+            opacity: 0.5;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-cream text-gray-700 font-sans selection:bg-primary selection:text-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-extrabold text-primary flex items-center gap-2">
+                🌾 Lúa
+            </a>
+            <div class="hidden md:flex gap-8 font-semibold text-gray-600">
+                <a href="#loi-ich" class="hover:text-primary transition">Lợi Ích</a>
+                <a href="#tinh-nang" class="hover:text-primary transition">Tính Năng</a>
+                <a href="#bct" class="hover:text-primary transition">Ba Mẹ Nói Gì</a>
+                <a href="#gallery" class="hover:text-primary transition">Hình Ảnh</a>
+            </div>
+            <a href="#dat-mua"
+                class="bg-primary hover:bg-green-600 text-white px-6 py-2 rounded-full font-bold shadow-green-200 shadow-lg transition transform hover:scale-105">
+                Đặt Mua Ngay
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-24 lg:pt-48 lg:pb-40 overflow-hidden">
+        <!-- Decor blobs -->
+        <div class="blob-shape bg-secondary w-[500px] h-[500px] rounded-full top-[-100px] left-[-100px]"></div>
+        <div class="blob-shape bg-yellow w-[400px] h-[400px] rounded-full bottom-0 right-[-100px]"></div>
+
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-12 text-center lg:text-left">
+                <!-- Text Content -->
+                <div class="lg:w-1/2 space-y-8 fade-in-section z-10">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 text-orange-600 font-bold text-sm tracking-wide uppercase border border-orange-200 shadow-sm">
+                        <span>⭐</span> Dành cho bé 18-36 tháng
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-extrabold text-gray-800 leading-[1.1]">
+                        Cùng <span
+                            class="text-primary inline-block transform hover:scale-105 transition duration-300 cursor-default">Lúa</span><br>
+                        Khơi Dậy <span class="text-secondary underline decoration-4 decoration-yellow/50">Trí Tò
+                            Mò</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                        Sách vải STEM tương tác đầu đời giúp bé phát triển vận động tinh, tư duy ngôn ngữ và nuôi dưỡng
+                        tình yêu thiên nhiên.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+                        <a href="#dat-mua"
+                            class="px-8 py-4 bg-primary text-white text-lg font-bold rounded-full shadow-green-300 shadow-xl hover:bg-green-600 hover:shadow-2xl transition transform hover:-translate-y-1">
+                            Đặt Mua Ngay
+                        </a>
+                        <a href="#gallery"
+                            class="px-8 py-4 bg-white text-primary border-2 border-primary text-lg font-bold rounded-full hover:bg-green-50 transition flex items-center justify-center gap-2 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Xem Demo
+                        </a>
+                    </div>
+
+                    <div
+                        class="pt-4 flex items-center justify-center lg:justify-start gap-4 text-sm font-semibold text-gray-500">
+                        <div class="flex -space-x-3">
+                            <div
+                                class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-300 to-pink-100 border-2 border-white shadow-md">
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-300 to-blue-100 border-2 border-white shadow-md">
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-300 to-yellow-100 border-2 border-white shadow-md">
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center text-xs text-gray-600 font-bold shadow-md">
+                                +1k</div>
+                        </div>
+                        <p>mẹ bỉm tin dùng</p>
+                    </div>
+                </div>
+
+                <!-- Hero Image with Floating Icons -->
+                <div class="lg:w-1/2 relative fade-in-section" style="transition-delay: 200ms;">
+                    <div
+                        class="absolute inset-0 bg-green-200/40 rounded-full filter blur-3xl transform scale-95 animate-pulse">
+                    </div>
+
+                    <!-- Main Image -->
+                    <img src="assets/images/hero_image_hd.png" alt="Sách vải Lúa"
+                        class="relative z-10 w-full rounded-[2.5rem] shadow-2xl transform rotate-2 hover:rotate-0 transition duration-700 ease-out border-[6px] border-white">
+
+                    <!-- Floating Icons (Liveliness) -->
+                    <!-- Leaf -->
+                    <div class="absolute -top-6 -left-4 bg-green-100 p-3 rounded-2xl shadow-lg z-20 animate-float">
+                        <svg class="w-8 h-8 text-green-600" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M17,8C8,10,5.9,16.17,3.82,21.34L5.71,22l1-2.3A4.49,4.49,0,0,0,8,20C19,20,22,3,22,3,21,5,14,5.25,9,6.25S2,11.5,2,13.5a6.22,6.22,0,0,0,1.75,3.75C7,13,11,9,17,8Z" />
+                        </svg>
+                    </div>
+                    <!-- Hand -->
+                    <div
+                        class="absolute top-1/2 -right-8 bg-blue-100 p-3 rounded-2xl shadow-lg z-20 animate-float-delayed">
+                        <svg class="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M21.5,10.61l-5.69-1.21V3.5A2.5,2.5,0,0,0,13.31,1,2.44,2.44,0,0,0,11,3.5V11h-.8a2.38,2.38,0,0,0-2.2-1.5,2.5,2.5,0,0,0-2.5,2.5v.52l-1.44-.76A2.46,2.46,0,0,0,2.83,12a2.51,2.51,0,0,0-.74,2.69l2,7.46A4.14,4.14,0,0,0,8.08,25h8.66a5.53,5.53,0,0,0,5.5-5.5V13A2.5,2.5,0,0,0,21.5,10.61Z" />
+                        </svg>
+                    </div>
+                    <!-- Brain -->
+                    <div
+                        class="absolute bottom-10 -left-8 bg-yellow-100 p-3 rounded-2xl shadow-lg z-20 animate-bounce-slow">
+                        <svg class="w-8 h-8 text-yellow-600" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12,2A10,10,0,0,0,2,12a10,10,0,0,0,10,10,10,10,0,0,0,10-10A10,10,0,0,0,12,2Zm1,17.93V19a1,1,0,0,1-2,0v-.93A8,8,0,0,1,4,11a1,1,0,0,1,2,0,6,6,0,0,0,12,0,1,1,0,0,1,2,0A8,8,0,0,1,13,19.93Z" />
+                        </svg>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Problem & Solution Section (Refined Card Style) -->
+    <section id="loi-ich" class="py-24 bg-white relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in-section">
+                <h2 class="text-3xl md:text-5xl font-bold text-gray-800 mb-6 font-display">Góc Nhìn Của Ba Mẹ</h2>
+                <div class="w-24 h-2 bg-primary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-16 items-start">
+                <!-- Problem Card (Red) -->
+                <div
+                    class="bg-red-50 p-8 rounded-[2rem] border-2 border-red-100 hover:shadow-xl hover:shadow-red-100 transition duration-300 fade-in-section">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-500">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-red-600">Nỗi Lo Thường Gặp</h3>
+                    </div>
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <div
+                                class="w-8 h-8 rounded-full bg-white flex-shrink-0 flex items-center justify-center shadow-sm">
+                                <span class="text-red-500 font-bold">✕</span>
+                            </div>
+                            <p class="text-gray-700 font-medium pt-1">Con nghiện điện thoại, TV gây hại mắt & chậm nói.
+                            </p>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div
+                                class="w-8 h-8 rounded-full bg-white flex-shrink-0 flex items-center justify-center shadow-sm">
+                                <span class="text-red-500 font-bold">✕</span>
+                            </div>
+                            <p class="text-gray-700 font-medium pt-1">Đồ chơi nhựa sắc nhọn, dễ vỡ, nguy hiểm.</p>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div
+                                class="w-8 h-8 rounded-full bg-white flex-shrink-0 flex items-center justify-center shadow-sm">
+                                <span class="text-red-500 font-bold">✕</span>
+                            </div>
+                            <p class="text-gray-700 font-medium pt-1">Con cả thèm chóng chán, mua về là vứt xó.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Solution Card (Green) -->
+                <div class="bg-green-50 p-8 rounded-[2rem] border-2 border-green-100 hover:shadow-xl hover:shadow-green-100 transition duration-300 fade-in-section"
+                    style="transition-delay: 150ms;">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-primary">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-primary">Giải Pháp Từ Lúa</h3>
+                    </div>
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <div
+                                class="w-8 h-8 rounded-full bg-primary flex-shrink-0 flex items-center justify-center shadow-lg shadow-green-200">
+                                <span class="text-white font-bold">✓</span>
+                            </div>
+                            <p class="text-gray-700 font-bold pt-1">An toàn tuyệt đối: <span
+                                    class="font-normal text-gray-600">Vải khử trùng, gặm nhấm thoải mái.</span></p>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div
+                                class="w-8 h-8 rounded-full bg-primary flex-shrink-0 flex items-center justify-center shadow-lg shadow-green-200">
+                                <span class="text-white font-bold">✓</span>
+                            </div>
+                            <p class="text-gray-700 font-bold pt-1">Giáo dục STEM: <span
+                                    class="font-normal text-gray-600">Học qua chơi (trồng cây, đếm số).</span></p>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div
+                                class="w-8 h-8 rounded-full bg-primary flex-shrink-0 flex items-center justify-center shadow-lg shadow-green-200">
+                                <span class="text-white font-bold">✓</span>
+                            </div>
+                            <p class="text-gray-700 font-bold pt-1">Siêu bền bỉ: <span
+                                    class="font-normal text-gray-600">Xé không rách, giặt sạch như mới.</span></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features (Refined Grid - Matching Uploaded Icons Style) -->
+    <section id="tinh-nang" class="py-24 bg-cream">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in-section">
+                <h2 class="text-3xl md:text-5xl font-bold text-gray-800 mb-6">Tại Sao Bé Yêu Thích?</h2>
+                <p class="text-lg text-gray-600">Thiết kế thông minh giúp kích hoạt đa giác quan cho trẻ.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Feature 1: Leaf (Green) -->
+                <div
+                    class="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group fade-in-section">
+                    <div
+                        class="w-20 h-20 mx-auto bg-green-100 rounded-[1.5rem] flex items-center justify-center mb-6 group-hover:scale-110 transition duration-300">
+                        <svg class="w-10 h-10 text-green-500" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M17,8C8,10,5.9,16.17,3.82,21.34L5.71,22l1-2.3A4.49,4.49,0,0,0,8,20C19,20,22,3,22,3,21,5,14,5.25,9,6.25S2,11.5,2,13.5a6.22,6.22,0,0,0,1.75,3.75C7,13,11,9,17,8Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">An Toàn</h3>
+                    <p class="text-gray-600 text-sm text-center font-medium">100% Cotton & Nỉ an toàn, không rụng lông,
+                        đạt chuẩn đồ chơi.</p>
+                </div>
+
+                <!-- Feature 2: Hand (Blue) -->
+                <div class="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group fade-in-section"
+                    style="transition-delay: 100ms;">
+                    <div
+                        class="w-20 h-20 mx-auto bg-blue-100 rounded-[1.5rem] flex items-center justify-center mb-6 group-hover:scale-110 transition duration-300">
+                        <svg class="w-10 h-10 text-blue-500" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M22,12a1,1,0,0,0-1,1v2H19V7a1,1,0,0,0-2,0V12a1,1,0,0,0-2,0V4a1,1,0,0,0-2,0V12a1,1,0,0,0-2,0V6A1,1,0,0,0,9,6v8.29l-1.34-.67a1,1,0,0,0-1.28.31L5.19,15.7l5.12,5.13A6,6,0,0,0,14.55,23H18a4,4,0,0,0,4-4Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Vận Động Tinh</h3>
+                    <p class="text-gray-600 text-sm text-center font-medium">Hoạt động bóc dán, cài khuy, kéo khóa giúp
+                        tay bé khéo léo.</p>
+                </div>
+
+                <!-- Feature 3: Brain (Yellow) -->
+                <div class="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group fade-in-section"
+                    style="transition-delay: 200ms;">
+                    <div
+                        class="w-20 h-20 mx-auto bg-yellow-100 rounded-[1.5rem] flex items-center justify-center mb-6 group-hover:scale-110 transition duration-300">
+                        <svg class="w-10 h-10 text-yellow-600" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12,2a10,10,0,0,0-6.88,17.26,3,3,0,0,0-1.07.72l-1.42,1.41a1,1,0,0,0,0,1.42L4,24.24a1,1,0,0,0,1.42,0l1.41-1.42a3,3,0,0,0,.72-1.07A10,10,0,0,0,12,2Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Tư Duy STEM</h3>
+                    <p class="text-gray-600 text-sm text-center font-medium">Học số đếm, màu sắc, con vật và logic
+                        nguyên nhân - kết quả.</p>
+                </div>
+
+                <!-- Feature 4: Family (Pink) -->
+                <div class="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group fade-in-section"
+                    style="transition-delay: 300ms;">
+                    <div
+                        class="w-20 h-20 mx-auto bg-pink-100 rounded-[1.5rem] flex items-center justify-center mb-6 group-hover:scale-110 transition duration-300">
+                        <svg class="w-10 h-10 text-pink-500" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M16,13C16,11.89,14.66,11,13,11A4,4,0,1,0,9,3,4,4,0,0,0,5,7v.5A6,6,0,0,0,2,13c0,2.15,1.15,4.05,2.94,5.08,0,.15,0,.3,0,.45A4.45,4.45,0,0,0,9.39,23h5.22a4.45,4.45,0,0,0,4.45-4.45c0-.15,0-.3,0-.45A5.94,5.94,0,0,0,22,13Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Gắn Kết</h3>
+                    <p class="text-gray-600 text-sm text-center font-medium">Giúp ba mẹ thoát ly điện thoại, dành thời
+                        gian chất lượng bên con.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof / Stats (More Vibrant) -->
+    <section id="bct" class="py-24 bg-primary text-white relative overflow-hidden">
+        <div
+            class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-80 h-80 bg-yellow-400/20 rounded-full blur-3xl transform -translate-x-1/3 translate-y-1/3">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-3 gap-12 text-center">
+                <div class="fade-in-section transform hover:scale-105 transition duration-500">
+                    <h3 class="text-6xl font-extrabold mb-4 text-yellow-300 tracking-tight">96%</h3>
+                    <p class="font-bold text-green-50 text-xl leading-relaxed">Phụ huynh hài lòng<br>sau 1 tuần sử dụng
+                    </p>
+                </div>
+                <div class="fade-in-section transform hover:scale-105 transition duration-500"
+                    style="transition-delay: 150ms;">
+                    <h3 class="text-6xl font-extrabold mb-4 text-yellow-300 tracking-tight">100%</h3>
+                    <p class="font-bold text-green-50 text-xl leading-relaxed">Vải an toàn<br>đạt chuẩn xuất khẩu</p>
+                </div>
+                <div class="fade-in-section transform hover:scale-105 transition duration-500"
+                    style="transition-delay: 300ms;">
+                    <h3 class="text-6xl font-extrabold mb-4 text-yellow-300 tracking-tight">50+</h3>
+                    <p class="font-bold text-green-50 text-xl leading-relaxed">Hoạt động thông minh<br>trong một cuốn
+                        sách</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Gallery -->
+    <section id="gallery" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in-section">
+                <h2 class="text-3xl md:text-5xl font-bold text-gray-800 mb-4">Khám Phá Trong Sách Lúa</h2>
+                <p class="text-lg text-gray-500">Mỗi trang sách là một thế giới mới lạ chờ bé khám phá.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="group relative overflow-hidden rounded-[2rem] shadow-lg cursor-pointer fade-in-section">
+                    <img src="assets/images/hero_image_hd.png" alt="Trang sách 1"
+                        class="w-full h-80 object-cover transform transition duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent translate-y-4 group-hover:translate-y-0 transition duration-500">
+                        <p class="text-white font-bold text-xl">Nông Trại Của Bé</p>
+                        <p class="text-gray-200 text-sm mt-1 opacity-0 group-hover:opacity-100 transition duration-500">
+                            Bé tập làm nông dân tí hon.</p>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-[2rem] shadow-lg cursor-pointer fade-in-section"
+                    style="transition-delay: 100ms;">
+                    <img src="assets/images/hero_image_hd.png" alt="Trang sách 2"
+                        class="w-full h-80 object-cover object-right transform transition duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent translate-y-4 group-hover:translate-y-0 transition duration-500">
+                        <p class="text-white font-bold text-xl">Vườn Rau Xanh</p>
+                        <p class="text-gray-200 text-sm mt-1 opacity-0 group-hover:opacity-100 transition duration-500">
+                            Thu hoạch cà rốt, củ cải.</p>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-[2rem] shadow-lg cursor-pointer fade-in-section"
+                    style="transition-delay: 200ms;">
+                    <img src="assets/images/hero_image_hd.png" alt="Trang sách 3"
+                        class="w-full h-80 object-cover object-left transform transition duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent translate-y-4 group-hover:translate-y-0 transition duration-500">
+                        <p class="text-white font-bold text-xl">Chuồng Trại Vui Nhộn</p>
+                        <p class="text-gray-200 text-sm mt-1 opacity-0 group-hover:opacity-100 transition duration-500">
+                            Nhận biết các bạn động vật.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing & Offer -->
+    <section id="dat-mua" class="py-24 bg-cream">
+        <div class="container mx-auto px-6">
+            <div
+                class="max-w-5xl mx-auto bg-white rounded-[3rem] shadow-2xl shadow-green-100 overflow-hidden flex flex-col md:flex-row fade-in-section">
+                <!-- Image Side -->
+                <div class="md:w-1/2 relative min-h-[400px]">
+                    <img src="assets/images/hero_image_hd.png" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-primary/40 to-transparent"></div>
+                    <div
+                        class="absolute top-8 left-8 bg-red-500 text-white font-bold px-4 py-2 rounded-full animate-bounce">
+                        Ưu đãi -30%
+                    </div>
+                </div>
+                <!-- Content Side -->
+                <div class="md:w-1/2 p-10 md:p-16 flex flex-col justify-center">
+                    <h2 class="text-4xl font-extrabold text-gray-800 mb-2">Combo Lúa Về Nhà</h2>
+                    <p class="text-gray-500 mb-8 font-medium">Full bộ quà tặng cho bé yêu phát triển toàn diện.</p>
+
+                    <div class="flex items-end gap-4 mb-8">
+                        <span
+                            class="text-gray-400 text-2xl font-bold line-through decoration-red-500 decoration-2">350.000đ</span>
+                        <span class="text-5xl font-extrabold text-primary">250.000đ</span>
+                    </div>
+
+                    <ul class="space-y-4 mb-10">
+                        <li class="flex items-center gap-3 text-gray-700 font-bold">
+                            <div
+                                class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs">
+                                ✓</div>
+                            <span>01 Sách vải Lúa (Phiên bản mới)</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-700 font-bold">
+                            <div
+                                class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs">
+                                ✓</div>
+                            <span>Ebook: Hướng dẫn chơi cùng con</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-700 font-bold">
+                            <div
+                                class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs">
+                                ✓</div>
+                            <span>Hộp quà Eco-friendly xinh xắn</span>
+                        </li>
+                    </ul>
+
+                    <button
+                        class="w-full py-5 bg-gradient-to-r from-primary to-green-500 text-white text-xl font-bold rounded-2xl shadow-xl shadow-green-200 hover:shadow-2xl hover:scale-[1.02] transition duration-300"
+                        onclick="alert('Đơn hàng Lúa của bạn đã được ghi nhận!')">
+                        ĐẶT MUA NGAY
+                    </button>
+                    <p class="text-xs text-center text-gray-400 mt-6 flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                        Miễn phí vận chuyển toàn quốc hôm nay!
+                        </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-20 pb-10">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-2">
+                    <h4 class="text-3xl font-bold text-primary mb-6 flex items-center gap-2">
+                        🌾 Lúa
+                    </h4>
+                    <p class="text-gray-400 leading-relaxed max-w-sm">
+                        Lúa là thương hiệu đồ chơi giáo dục an toàn, được thiết kế bởi tấm lòng của những người mẹ, giúp
+                        bé yêu lớn khôn tự nhiên và hạnh phúc.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-gray-200">Liên Hệ</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li class="flex items-center gap-3 hover:text-white transition cursor-pointer">
+                            <span>📍</span> Hà Nội, Việt Nam
+                        </li>
+                        <li class="flex items-center gap-3 hover:text-white transition cursor-pointer">
+                            <span>📞</span> 0912 345 678
+                        </li>
+                        <li class="flex items-center gap-3 hover:text-white transition cursor-pointer">
+                            <span>📧</span> hello@duanlua.vn
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-gray-200">Kết Nối</h4>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary text-gray-400 hover:text-white transition duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#"
+                            class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-pink-600 text-gray-400 hover:text-white transition duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <path d="M18.5 6.5a1 1 0 1 0 1 1 1 1 0 0 0-1-1z"></path>
+                                <path
+                                    d="M16 3.13a10.87 10.87 0 0 0-3.37-.11 15 15 0 0 0-4.88 1.1A8.93 8.93 0 0 0 4.13 8 15 15 0 0 0 3.02 12.87 10.87 10.87 0 0 0 2.91 16.25c.16 2.38 1.25 4.54 3.09 6.07A10.66 10.66 0 0 0 12 24.32a10.66 10.66 0 0 0 6-2 10.63 10.63 0 0 0 3.09-6.07 10.87 10.87 0 0 0-.11-3.38 15 15 0 0 0-1.1-4.87 8.93 8.93 0 0 0-3.93-3.87 15 15 0 0 0-4.87-1.1z">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-600 text-sm">
+                <p>&copy; 2026 Dự án Lúa - Team Group 2. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn"
+        class="fixed bottom-8 right-8 bg-primary text-white p-3 rounded-full shadow-lg translate-y-20 opacity-0 transition-all duration-500 hover:bg-green-600 focus:outline-none z-50 transform hover:scale-110 group"
+        aria-label="Lên đầu trang">
+        <svg class="w-6 h-6 group-hover:-translate-y-1 transition duration-300" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <script>
+        // Intersection Observer for Fade-in Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-in-section');
+            fadeElements.forEach(el => observer.observe(el));
+
+            // Scroll to Top Logic
+            const scrollBtn = document.getElementById('scrollToTopBtn');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    scrollBtn.classList.remove('translate-y-20', 'opacity-0');
+                } else {
+                    scrollBtn.classList.add('translate-y-20', 'opacity-0');
+                }
+            });
+
+            scrollBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
