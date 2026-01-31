@@ -1,5 +1,12 @@
 {
-    "cleanUrls": true,
+    "version": 2,
+    "name": "lua-stem-book",
+    "builds": [
+        {
+            "src": "index.html",
+            "use": "@vercel/static"
+        }
+    ],
     "headers": [
         {
             "source": "/assets/(.*)",
