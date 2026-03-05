@@ -1,5 +1,6 @@
 {
-    "cleanUrls": true,
+    "version": 2,
+    "name": "lua-stem-book",
     "headers": [
         {
             "source": "/assets/(.*)",
