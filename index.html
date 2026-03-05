@@ -8,6 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script>
         tailwind.config = {
             theme: {
@@ -32,6 +34,15 @@
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-20px)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' }
+                        },
+                        shine: {
+                            '100%': { left: '125%' }
                         }
                     }
                 }
@@ -75,24 +86,102 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* Glassmorphism Classes */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        }
+
+        /* Animated Elements */
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        /* Button Shine Effect */
+        .btn-shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-shine-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-20deg);
+            animation: shine 4s ease-in-out infinite;
+        }
+
+
+        /* Swiper Customizations */
+        .swiper-pagination-bullet-active {
+            background-color: #76b947 !important;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #76b947 !important;
+            background: white;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            transform: scale(1.1);
+            color: white !important;
+            background: #76b947;
+        }
+
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 18px !important;
+            font-weight: 800;
+        }
     </style>
 </head>
 
 <body class="bg-cream text-gray-700 font-sans selection:bg-primary selection:text-white overflow-x-hidden">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300">
+    <nav class="fixed w-full z-50 glass-nav shadow-sm transition-all duration-300">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-3xl font-extrabold text-primary flex items-center gap-2">
                 🌾 Lúa
             </a>
-            <div class="hidden md:flex gap-8 font-semibold text-gray-600">
+            <div class="hidden md:flex gap-6 lg:gap-8 font-semibold text-gray-600">
                 <a href="#loi-ich" class="hover:text-primary transition">Lợi Ích</a>
                 <a href="#tinh-nang" class="hover:text-primary transition">Tính Năng</a>
                 <a href="#bct" class="hover:text-primary transition">Ba Mẹ Nói Gì</a>
                 <a href="#gallery" class="hover:text-primary transition">Hình Ảnh</a>
+                <a href="#cung-lua" class="hover:text-primary transition">Cùng Lúa Đi Muôn Nơi</a>
             </div>
-            <a href="#dat-mua"
+            <a href="https://www.facebook.com/profile.php?id=61555904427896" target="_blank"
                 class="bg-primary hover:bg-green-600 text-white px-6 py-2 rounded-full font-bold shadow-green-200 shadow-lg transition transform hover:scale-105">
                 Đặt Mua Ngay
             </a>
@@ -101,9 +190,15 @@
 
     <!-- Hero Section -->
     <header class="relative pt-32 pb-24 lg:pt-48 lg:pb-40 overflow-hidden">
-        <!-- Decor blobs -->
-        <div class="blob-shape bg-secondary w-[500px] h-[500px] rounded-full top-[-100px] left-[-100px]"></div>
-        <div class="blob-shape bg-yellow w-[400px] h-[400px] rounded-full bottom-0 right-[-100px]"></div>
+        <!-- Animated Decor blobs -->
+        <div class="blob-shape bg-secondary w-[500px] h-[500px] rounded-full top-[-100px] left-[-100px] animate-blob">
+        </div>
+        <div
+            class="blob-shape bg-yellow w-[400px] h-[400px] rounded-full bottom-0 right-[-100px] animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="blob-shape bg-accent opacity-30 w-[300px] h-[300px] rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-blob animation-delay-4000">
+        </div>
 
         <div class="container mx-auto px-6">
             <div class="flex flex-col lg:flex-row items-center gap-12 text-center lg:text-left">
@@ -125,12 +220,12 @@
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
-                        <a href="#dat-mua"
-                            class="px-8 py-4 bg-primary text-white text-lg font-bold rounded-full shadow-green-300 shadow-xl hover:bg-green-600 hover:shadow-2xl transition transform hover:-translate-y-1">
+                        <a href="https://www.facebook.com/profile.php?id=61555904427896" target="_blank"
+                            class="btn-shine-effect px-8 py-4 bg-primary text-white text-lg font-bold rounded-full shadow-green-300 shadow-[0_10px_30px_-10px_rgba(118,185,71,0.6)] hover:bg-green-600 hover:shadow-[0_15px_40px_-10px_rgba(118,185,71,0.8)] transition transform hover:-translate-y-1">
                             Đặt Mua Ngay
                         </a>
                         <a href="#gallery"
-                            class="px-8 py-4 bg-white text-primary border-2 border-primary text-lg font-bold rounded-full hover:bg-green-50 transition flex items-center justify-center gap-2 shadow-sm">
+                            class="px-8 py-4 glass-card text-primary text-lg font-bold rounded-full hover:bg-green-50 transition flex items-center justify-center gap-2 group">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
@@ -162,19 +257,13 @@
                     </div>
                 </div>
 
-                <!-- Hero Image with Floating Icons -->
-                <div class="lg:w-1/2 relative fade-in-section" style="transition-delay: 200ms;">
-                    <div
-                        class="absolute inset-0 bg-green-200/40 rounded-full filter blur-3xl transform scale-95 animate-pulse">
-                    </div>
-
-                    <!-- Main Image -->
-                    <img src="assets/images/hero_image_hd.png" alt="Sách vải Lúa"
-                        class="relative z-10 w-full rounded-[2.5rem] shadow-2xl transform rotate-2 hover:rotate-0 transition duration-700 ease-out border-[6px] border-white">
-
+                <!-- Combo Lúa Về Nhà Card Replacing Hero Image -->
+                <div class="lg:w-1/2 relative fade-in-section mt-12 lg:mt-0 lg:pl-6 xl:pl-10"
+                    style="transition-delay: 200ms;">
                     <!-- Floating Icons (Liveliness) -->
                     <!-- Leaf -->
-                    <div class="absolute -top-6 -left-4 bg-green-100 p-3 rounded-2xl shadow-lg z-20 animate-float">
+                    <div
+                        class="absolute -top-6 -left-4 bg-green-100 p-3 rounded-2xl shadow-lg z-20 animate-float cursor-pointer hover:scale-110 transition-transform hidden lg:block">
                         <svg class="w-8 h-8 text-green-600" viewBox="0 0 24 24" fill="currentColor">
                             <path
                                 d="M17,8C8,10,5.9,16.17,3.82,21.34L5.71,22l1-2.3A4.49,4.49,0,0,0,8,20C19,20,22,3,22,3,21,5,14,5.25,9,6.25S2,11.5,2,13.5a6.22,6.22,0,0,0,1.75,3.75C7,13,11,9,17,8Z" />
@@ -182,7 +271,7 @@
                     </div>
                     <!-- Hand -->
                     <div
-                        class="absolute top-1/2 -right-8 bg-blue-100 p-3 rounded-2xl shadow-lg z-20 animate-float-delayed">
+                        class="absolute top-1/2 -right-8 bg-blue-100 p-3 rounded-2xl shadow-lg z-20 animate-float-delayed cursor-pointer hover:scale-110 transition-transform hidden lg:block">
                         <svg class="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
                             <path
                                 d="M21.5,10.61l-5.69-1.21V3.5A2.5,2.5,0,0,0,13.31,1,2.44,2.44,0,0,0,11,3.5V11h-.8a2.38,2.38,0,0,0-2.2-1.5,2.5,2.5,0,0,0-2.5,2.5v.52l-1.44-.76A2.46,2.46,0,0,0,2.83,12a2.51,2.51,0,0,0-.74,2.69l2,7.46A4.14,4.14,0,0,0,8.08,25h8.66a5.53,5.53,0,0,0,5.5-5.5V13A2.5,2.5,0,0,0,21.5,10.61Z" />
@@ -190,13 +279,73 @@
                     </div>
                     <!-- Brain -->
                     <div
-                        class="absolute bottom-10 -left-8 bg-yellow-100 p-3 rounded-2xl shadow-lg z-20 animate-bounce-slow">
+                        class="absolute bottom-10 -left-8 bg-yellow-100 p-3 rounded-2xl shadow-lg z-20 animate-bounce-slow cursor-pointer hover:scale-110 transition-transform hidden lg:block">
                         <svg class="w-8 h-8 text-yellow-600" viewBox="0 0 24 24" fill="currentColor">
                             <path
                                 d="M12,2A10,10,0,0,0,2,12a10,10,0,0,0,10,10,10,10,0,0,0,10-10A10,10,0,0,0,12,2Zm1,17.93V19a1,1,0,0,1-2,0v-.93A8,8,0,0,1,4,11a1,1,0,0,1,2,0,6,6,0,0,0,12,0,1,1,0,0,1,2,0A8,8,0,0,1,13,19.93Z" />
                         </svg>
                     </div>
 
+                    <!-- Main Card -->
+                    <div
+                        class="bg-white rounded-[2rem] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col relative transform hover:-translate-y-2 transition duration-500 ease-out z-10 border border-gray-100">
+                        <div class="relative h-64 sm:h-[320px] bg-[#EEF5EA] flex flex-col items-center overflow-hidden">
+                            <img src="assets/images/hero_image_hd.png"
+                                class="absolute inset-0 w-full h-full object-cover object-top" alt="Combo Lúa">
+                            <div
+                                class="absolute top-5 left-5 bg-[#FA5A5A] text-white font-bold px-4 py-1.5 rounded-full shadow-md text-sm tracking-wide z-10">
+                                Ưu đãi -30%
+                            </div>
+                        </div>
+                        <div class="p-8 sm:p-10 flex flex-col justify-center bg-white flex-grow">
+                            <h2 class="text-[28px] sm:text-[32px] font-extrabold text-[#1e293b] mb-2 tracking-tight">
+                                Combo Lúa Về Nhà</h2>
+                            <p class="text-gray-500 mb-6 font-medium text-[15px]">Full bộ quà tặng cho bé yêu phát triển
+                                toàn diện.</p>
+
+                            <div class="flex items-end gap-3 mb-6">
+                                <span
+                                    class="text-gray-400 text-xl font-bold line-through decoration-[#FA5A5A] decoration-2">350.000đ</span>
+                                <span
+                                    class="text-[36px] font-extrabold text-[#76B947] tracking-tight leading-none">250.000đ</span>
+                            </div>
+
+                            <ul class="space-y-4 mb-8">
+                                <li class="flex items-center gap-3 text-[#334155] font-bold">
+                                    <div
+                                        class="w-[22px] h-[22px] rounded-full bg-green-100 text-[#76B947] flex items-center justify-center text-[10px] shrink-0">
+                                        ✓</div>
+                                    <span class="text-[15px]">01 Sách vải Lúa (Phiên bản mới)</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-[#334155] font-bold">
+                                    <div
+                                        class="w-[22px] h-[22px] rounded-full bg-green-100 text-[#76B947] flex items-center justify-center text-[10px] shrink-0">
+                                        ✓</div>
+                                    <span class="text-[15px]">Ebook: Hướng dẫn chơi cùng con</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-[#334155] font-bold">
+                                    <div
+                                        class="w-[22px] h-[22px] rounded-full bg-green-100 text-[#76B947] flex items-center justify-center text-[10px] shrink-0">
+                                        ✓</div>
+                                    <span class="text-[15px]">Hộp quà Eco-friendly xinh xắn</span>
+                                </li>
+                            </ul>
+
+                            <button
+                                class="w-full sm:w-[320px] mx-auto py-4 bg-[#76C24B] hover:bg-[#5da02c] text-white text-[18px] font-extrabold rounded-full shadow-lg shadow-green-200 hover:shadow-xl hover:scale-[1.02] transform transition-all duration-300 tracking-wide"
+                                onclick="window.open('https://www.facebook.com/profile.php?id=61555904427896', '_blank')">
+                                Đặt Mua Ngay
+                            </button>
+                            <p
+                                class="text-xs text-center text-gray-400 mt-5 flex items-center justify-center gap-1.5 font-medium">
+                                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                                </svg>
+                                Miễn phí vận chuyển toàn quốc hôm nay!
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -304,9 +453,9 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Feature 1: Leaf (Green) -->
                 <div
-                    class="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group fade-in-section">
+                    class="glass-card p-8 rounded-[2rem] hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 group fade-in-section border border-white/60">
                     <div
-                        class="w-20 h-20 mx-auto bg-green-100 rounded-[1.5rem] flex items-center justify-center mb-6 group-hover:scale-110 transition duration-300">
+                        class="w-20 h-20 mx-auto bg-gradient-to-br from-green-100 to-green-50 rounded-[1.5rem] flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition duration-500 shadow-sm">
                         <svg class="w-10 h-10 text-green-500" viewBox="0 0 24 24" fill="currentColor">
                             <path
                                 d="M17,8C8,10,5.9,16.17,3.82,21.34L5.71,22l1-2.3A4.49,4.49,0,0,0,8,20C19,20,22,3,22,3,21,5,14,5.25,9,6.25S2,11.5,2,13.5a6.22,6.22,0,0,0,1.75,3.75C7,13,11,9,17,8Z" />
@@ -318,10 +467,10 @@
                 </div>
 
                 <!-- Feature 2: Hand (Blue) -->
-                <div class="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group fade-in-section"
+                <div class="glass-card p-8 rounded-[2rem] hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 group fade-in-section border border-white/60"
                     style="transition-delay: 100ms;">
                     <div
-                        class="w-20 h-20 mx-auto bg-blue-100 rounded-[1.5rem] flex items-center justify-center mb-6 group-hover:scale-110 transition duration-300">
+                        class="w-20 h-20 mx-auto bg-gradient-to-br from-blue-100 to-blue-50 rounded-[1.5rem] flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-6 transition duration-500 shadow-sm">
                         <svg class="w-10 h-10 text-blue-500" viewBox="0 0 24 24" fill="currentColor">
                             <path
                                 d="M22,12a1,1,0,0,0-1,1v2H19V7a1,1,0,0,0-2,0V12a1,1,0,0,0-2,0V4a1,1,0,0,0-2,0V12a1,1,0,0,0-2,0V6A1,1,0,0,0,9,6v8.29l-1.34-.67a1,1,0,0,0-1.28.31L5.19,15.7l5.12,5.13A6,6,0,0,0,14.55,23H18a4,4,0,0,0,4-4Z" />
@@ -333,10 +482,10 @@
                 </div>
 
                 <!-- Feature 3: Brain (Yellow) -->
-                <div class="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group fade-in-section"
+                <div class="glass-card p-8 rounded-[2rem] hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 group fade-in-section border border-white/60"
                     style="transition-delay: 200ms;">
                     <div
-                        class="w-20 h-20 mx-auto bg-yellow-100 rounded-[1.5rem] flex items-center justify-center mb-6 group-hover:scale-110 transition duration-300">
+                        class="w-20 h-20 mx-auto bg-gradient-to-br from-yellow-100 to-yellow-50 rounded-[1.5rem] flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition duration-500 shadow-sm">
                         <svg class="w-10 h-10 text-yellow-600" viewBox="0 0 24 24" fill="currentColor">
                             <path
                                 d="M12,2a10,10,0,0,0-6.88,17.26,3,3,0,0,0-1.07.72l-1.42,1.41a1,1,0,0,0,0,1.42L4,24.24a1,1,0,0,0,1.42,0l1.41-1.42a3,3,0,0,0,.72-1.07A10,10,0,0,0,12,2Z" />
@@ -348,10 +497,10 @@
                 </div>
 
                 <!-- Feature 4: Family (Pink) -->
-                <div class="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group fade-in-section"
+                <div class="glass-card p-8 rounded-[2rem] hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 group fade-in-section border border-white/60"
                     style="transition-delay: 300ms;">
                     <div
-                        class="w-20 h-20 mx-auto bg-pink-100 rounded-[1.5rem] flex items-center justify-center mb-6 group-hover:scale-110 transition duration-300">
+                        class="w-20 h-20 mx-auto bg-gradient-to-br from-pink-100 to-pink-50 rounded-[1.5rem] flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-6 transition duration-500 shadow-sm">
                         <svg class="w-10 h-10 text-pink-500" viewBox="0 0 24 24" fill="currentColor">
                             <path
                                 d="M16,13C16,11.89,14.66,11,13,11A4,4,0,1,0,9,3,4,4,0,0,0,5,7v.5A6,6,0,0,0,2,13c0,2.15,1.15,4.05,2.94,5.08,0,.15,0,.3,0,.45A4.45,4.45,0,0,0,9.39,23h5.22a4.45,4.45,0,0,0,4.45-4.45c0-.15,0-.3,0-.45A5.94,5.94,0,0,0,22,13Z" />
@@ -404,109 +553,162 @@
                 <p class="text-lg text-gray-500">Mỗi trang sách là một thế giới mới lạ chờ bé khám phá.</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="group relative overflow-hidden rounded-[2rem] shadow-lg cursor-pointer fade-in-section">
-                    <img src="assets/images/hero_image_hd.png" alt="Trang sách 1"
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Card 1 -->
+                <div
+                    class="group relative overflow-hidden rounded-[2.5rem] shadow-[0_15px_30px_rgba(0,0,0,0.1)] cursor-pointer fade-in-section border-4 border-white">
+                    <img src="assets/images/anh13.jpg" alt="Trang sách 1"
                         class="w-full h-80 object-cover transform transition duration-700 group-hover:scale-110">
                     <div
-                        class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent translate-y-4 group-hover:translate-y-0 transition duration-500">
-                        <p class="text-white font-bold text-xl">Nông Trại Của Bé</p>
-                        <p class="text-gray-200 text-sm mt-1 opacity-0 group-hover:opacity-100 transition duration-500">
+                        class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/30 to-transparent flex flex-col justify-end p-8 translate-y-8 group-hover:translate-y-0 transition duration-500">
+                        <p
+                            class="text-white font-extrabold text-2xl mb-1 transform translate-y-4 group-hover:translate-y-0 transition duration-500">
+                            Nông Trại Của Bé</p>
+                        <p
+                            class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition duration-500 delay-100">
                             Bé tập làm nông dân tí hon.</p>
                     </div>
                 </div>
-                <div class="group relative overflow-hidden rounded-[2rem] shadow-lg cursor-pointer fade-in-section"
+                <!-- Card 2 -->
+                <div class="group relative overflow-hidden rounded-[2.5rem] shadow-[0_15px_30px_rgba(0,0,0,0.1)] cursor-pointer fade-in-section border-4 border-white"
                     style="transition-delay: 100ms;">
-                    <img src="assets/images/hero_image_hd.png" alt="Trang sách 2"
-                        class="w-full h-80 object-cover object-right transform transition duration-700 group-hover:scale-110">
+                    <img src="assets/images/anh14.jpg" alt="Trang sách 2"
+                        class="w-full h-80 object-cover transform transition duration-700 group-hover:scale-110">
                     <div
-                        class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent translate-y-4 group-hover:translate-y-0 transition duration-500">
-                        <p class="text-white font-bold text-xl">Vườn Rau Xanh</p>
-                        <p class="text-gray-200 text-sm mt-1 opacity-0 group-hover:opacity-100 transition duration-500">
+                        class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/30 to-transparent flex flex-col justify-end p-8 translate-y-8 group-hover:translate-y-0 transition duration-500">
+                        <p
+                            class="text-white font-extrabold text-2xl mb-1 transform translate-y-4 group-hover:translate-y-0 transition duration-500">
+                            Vườn Rau Xanh</p>
+                        <p
+                            class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition duration-500 delay-100">
                             Thu hoạch cà rốt, củ cải.</p>
                     </div>
                 </div>
-                <div class="group relative overflow-hidden rounded-[2rem] shadow-lg cursor-pointer fade-in-section"
+                <!-- Card 3 -->
+                <div class="group relative overflow-hidden rounded-[2.5rem] shadow-[0_15px_30px_rgba(0,0,0,0.1)] cursor-pointer fade-in-section border-4 border-white"
                     style="transition-delay: 200ms;">
-                    <img src="assets/images/hero_image_hd.png" alt="Trang sách 3"
-                        class="w-full h-80 object-cover object-left transform transition duration-700 group-hover:scale-110">
+                    <img src="assets/images/anh15.jpg" alt="Trang sách 3"
+                        class="w-full h-80 object-cover transform transition duration-700 group-hover:scale-110">
                     <div
-                        class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent translate-y-4 group-hover:translate-y-0 transition duration-500">
-                        <p class="text-white font-bold text-xl">Chuồng Trại Vui Nhộn</p>
-                        <p class="text-gray-200 text-sm mt-1 opacity-0 group-hover:opacity-100 transition duration-500">
+                        class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/30 to-transparent flex flex-col justify-end p-8 translate-y-8 group-hover:translate-y-0 transition duration-500">
+                        <p
+                            class="text-white font-extrabold text-2xl mb-1 transform translate-y-4 group-hover:translate-y-0 transition duration-500">
+                            Chuồng Trại Vui Nhộn</p>
+                        <p
+                            class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition duration-500 delay-100">
                             Nhận biết các bạn động vật.</p>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="group relative overflow-hidden rounded-[2.5rem] shadow-[0_15px_30px_rgba(0,0,0,0.1)] cursor-pointer fade-in-section border-4 border-white"
+                    style="transition-delay: 300ms;">
+                    <img src="assets/images/anh16.jpg" alt="Trang sách 4"
+                        class="w-full h-80 object-cover transform transition duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/30 to-transparent flex flex-col justify-end p-8 translate-y-8 group-hover:translate-y-0 transition duration-500">
+                        <p
+                            class="text-white font-extrabold text-2xl mb-1 transform translate-y-4 group-hover:translate-y-0 transition duration-500">
+                            Ngày Hội Thu Hoạch</p>
+                        <p
+                            class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition duration-500 delay-100">
+                            Khám phá sắc màu thiên nhiên.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing & Offer -->
-    <section id="dat-mua" class="py-24 bg-cream">
+    <!-- Carousel Section: Cùng Lúa Đi Muôn Nơi -->
+    <section id="cung-lua" class="py-24 bg-cream overflow-hidden">
         <div class="container mx-auto px-6">
-            <div
-                class="max-w-5xl mx-auto bg-white rounded-[3rem] shadow-2xl shadow-green-100 overflow-hidden flex flex-col md:flex-row fade-in-section">
-                <!-- Image Side -->
-                <div class="md:w-1/2 relative min-h-[400px]">
-                    <img src="assets/images/hero_image_hd.png" class="absolute inset-0 w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-primary/40 to-transparent"></div>
-                    <div
-                        class="absolute top-8 left-8 bg-red-500 text-white font-bold px-4 py-2 rounded-full animate-bounce">
-                        Ưu đãi -30%
-                    </div>
+            <div class="text-center mb-16 fade-in-section">
+                <h2 class="text-3xl md:text-5xl font-bold text-gray-800 mb-4">Cùng Lúa Đi Muôn Nơi</h2>
+                <p class="text-lg text-gray-500">Người bạn đồng hành quen thuộc trên mọi ngóc ngách chuyến đi của bé.
+                </p>
+            </div>
+
+            <div class="swiper mySwiper fade-in-section !pb-16 px-4">
+                <div class="swiper-wrapper">
+                    <!-- Slides 1 to 12 -->
+
+                    <div class="swiper-slide"><img src="assets/images/anh2.jpg"
+                            class="w-full h-[350px] object-cover rounded-[2rem] shadow-md border-[8px] border-white"
+                            alt="Cùng Lúa đi muôn nơi 2" onerror="this.src='assets/images/anh3.jpg'"></div>
+                    <div class="swiper-slide"><img src="assets/images/anh3.jpg"
+                            class="w-full h-[350px] object-cover rounded-[2rem] shadow-md border-[8px] border-white"
+                            alt="Cùng Lúa đi muôn nơi 3"></div>
+                    <div class="swiper-slide"><img src="assets/images/anh4.jpg"
+                            class="w-full h-[350px] object-cover rounded-[2rem] shadow-md border-[8px] border-white"
+                            alt="Cùng Lúa đi muôn nơi 4"></div>
+                    <div class="swiper-slide"><img src="assets/images/anh5.jpg"
+                            class="w-full h-[350px] object-cover rounded-[2rem] shadow-md border-[8px] border-white"
+                            alt="Cùng Lúa đi muôn nơi 5"></div>
+                    <div class="swiper-slide"><img src="assets/images/anh6.jpg"
+                            class="w-full h-[350px] object-cover rounded-[2rem] shadow-md border-[8px] border-white"
+                            alt="Cùng Lúa đi muôn nơi 6"></div>
+                    <div class="swiper-slide"><img src="assets/images/anh7.jpg"
+                            class="w-full h-[350px] object-cover rounded-[2rem] shadow-md border-[8px] border-white"
+                            alt="Cùng Lúa đi muôn nơi 7"></div>
+                    <div class="swiper-slide"><img src="assets/images/anh8.jpg"
+                            class="w-full h-[350px] object-cover rounded-[2rem] shadow-md border-[8px] border-white"
+                            alt="Cùng Lúa đi muôn nơi 8"></div>
+                    <div class="swiper-slide"><img src="assets/images/anh9.jpg"
+                            class="w-full h-[350px] object-cover rounded-[2rem] shadow-md border-[8px] border-white"
+                            alt="Cùng Lúa đi muôn nơi 9"></div>
+                    <div class="swiper-slide"><img src="assets/images/anh10.jpg"
+                            class="w-full h-[350px] object-cover rounded-[2rem] shadow-md border-[8px] border-white"
+                            alt="Cùng Lúa đi muôn nơi 10"></div>
+                    <div class="swiper-slide"><img src="assets/images/anh11.jpg"
+                            class="w-full h-[350px] object-cover rounded-[2rem] shadow-md border-[8px] border-white"
+                            alt="Cùng Lúa đi muôn nơi 11"></div>
+                    <div class="swiper-slide"><img src="assets/images/anh12.jpg"
+                            class="w-full h-[350px] object-cover rounded-[2rem] shadow-md border-[8px] border-white"
+                            alt="Cùng Lúa đi muôn nơi 12"></div>
                 </div>
-                <!-- Content Side -->
-                <div class="md:w-1/2 p-10 md:p-16 flex flex-col justify-center">
-                    <h2 class="text-4xl font-extrabold text-gray-800 mb-2">Combo Lúa Về Nhà</h2>
-                    <p class="text-gray-500 mb-8 font-medium">Full bộ quà tặng cho bé yêu phát triển toàn diện.</p>
+                <!-- Pagination & Arrows -->
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
 
-                    <div class="flex items-end gap-4 mb-8">
-                        <span
-                            class="text-gray-400 text-2xl font-bold line-through decoration-red-500 decoration-2">350.000đ</span>
-                        <span class="text-5xl font-extrabold text-primary">250.000đ</span>
+    <!-- Hướng Dẫn Section -->
+    <section id="huong-dan" class="py-24 bg-white overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center fade-in-section mb-12">
+                <h2 class="text-3xl md:text-5xl font-bold text-primary mb-4">Hướng Dẫn Cùng Lúa</h2>
+                <div class="w-24 h-2 bg-yellow-400 mx-auto rounded-full mb-8"></div>
+                <p class="text-lg text-gray-500 max-w-2xl mx-auto">Tham khảo video và các tài liệu hướng dẫn bé chơi
+                    ngoan
+                    cùng Lúa, kích thích tối đa trí tưởng tượng và sự phát triển.</p>
+            </div>
+
+            <div class="max-w-6xl mx-auto flex justify-center fade-in-section" style="transition-delay: 150ms;">
+                <div
+                    class="glass-card rounded-[2rem] p-4 sm:p-6 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] border border-gray-100 bg-gray-50/50 w-full max-w-[1000px]">
+                    <div class="relative w-full h-0 pb-[56.25%] overflow-hidden rounded-2xl shadow-inner bg-black">
+                        <video class="absolute top-0 left-0 w-full h-full object-cover" controls playsinline>
+                            <source src="assets/images/7590324936528.mp4" type="video/mp4">
+                            Trình duyệt của bạn không hỗ trợ video.
+                        </video>
                     </div>
-
-                    <ul class="space-y-4 mb-10">
-                        <li class="flex items-center gap-3 text-gray-700 font-bold">
-                            <div
-                                class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs">
-                                ✓</div>
-                            <span>01 Sách vải Lúa (Phiên bản mới)</span>
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-700 font-bold">
-                            <div
-                                class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs">
-                                ✓</div>
-                            <span>Ebook: Hướng dẫn chơi cùng con</span>
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-700 font-bold">
-                            <div
-                                class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs">
-                                ✓</div>
-                            <span>Hộp quà Eco-friendly xinh xắn</span>
-                        </li>
-                    </ul>
-
-                    <button
-                        class="w-full py-5 bg-gradient-to-r from-primary to-green-500 text-white text-xl font-bold rounded-2xl shadow-xl shadow-green-200 hover:shadow-2xl hover:scale-[1.02] transition duration-300"
-                        onclick="alert('Đơn hàng Lúa của bạn đã được ghi nhận!')">
-                        ĐẶT MUA NGAY
-                    </button>
-                    <p class="text-xs text-center text-gray-400 mt-6 flex items-center justify-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                        </svg>
-                        Miễn phí vận chuyển toàn quốc hôm nay!
-                        </button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white pt-20 pb-10">
-        <div class="container mx-auto px-6">
+    <footer class="bg-gray-900 text-white pt-24 pb-12 relative overflow-hidden">
+        <!-- Footer wave Decor -->
+        <div class="absolute top-0 left-0 w-full h-1 overflow-hidden">
+            <div class="w-full h-full bg-gradient-to-r from-primary via-yellow-400 to-primary"></div>
+        </div>
+        <div
+            class="absolute bottom-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl transform translate-x-1/3 translate-y-1/3">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
             <div class="grid md:grid-cols-4 gap-12 mb-16">
                 <div class="col-span-1 md:col-span-2">
                     <h4 class="text-3xl font-bold text-primary mb-6 flex items-center gap-2">
@@ -534,7 +736,7 @@
                 <div>
                     <h4 class="text-lg font-bold mb-6 text-gray-200">Kết Nối</h4>
                     <div class="flex gap-4">
-                        <a href="#"
+                        <a href="https://www.facebook.com/profile.php?id=61555904427896" target="_blank"
                             class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary text-gray-400 hover:text-white transition duration-300">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
@@ -569,9 +771,35 @@
         </svg>
     </button>
 
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         // Intersection Observer for Fade-in Animations
         document.addEventListener('DOMContentLoaded', () => {
+            // Swiper Initialization for auto-scrolling gallery
+            var swiper = new Swiper(".mySwiper", {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                loop: true,
+                autoplay: {
+                    delay: 2000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                    dynamicBullets: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                breakpoints: {
+                    640: { slidesPerView: 2, spaceBetween: 20 },
+                    768: { slidesPerView: 3, spaceBetween: 30 },
+                    1024: { slidesPerView: 4, spaceBetween: 30 },
+                },
+            });
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
